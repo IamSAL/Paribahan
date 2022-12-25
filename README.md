@@ -1,20 +1,5 @@
-# paribahan
+# paribahan app implementation in Flutter (WIP)
 
-Paribahan app UI WIP
+- [Public prototype](https://www.figma.com/proto/Zgk9lgbsG8FUojB5LFs39q/Paribahan?node-id=67%3A1037&scaling=scale-down&page-id=0%3A1&starting-point-node-id=67%3A1037)
 
-![image info](./assets/images/app_landing.jpg)
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-# Paribahan
+<img src="./assets/images/app_landing.jpg" width="200"  />
