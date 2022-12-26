@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:paribahan/pages/coming_soon_page.dart';
 import 'package:paribahan/pages/landing_page.dart';
+import 'package:paribahan/pages/routes_and_rents/route_search_page.dart';
 
 void main() {
   initializeDateFormatting("en_US");
@@ -28,6 +30,11 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const LandingPage());
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const LandingPage(),
+          '/routes_and_rents': (context) => const RouteSearchPage(),
+          '/wip': (context) => const ComingSoonPage(),
+        });
   }
 }

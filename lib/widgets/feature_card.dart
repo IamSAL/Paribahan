@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class FeatureCard extends StatelessWidget {
   final String imagePath;
   final String title;
-  const FeatureCard({Key? key, required this.imagePath, required this.title})
+  final VoidCallback onTap;
+  const FeatureCard(
+      {Key? key,
+      required this.imagePath,
+      required this.title,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -16,12 +21,7 @@ class FeatureCard extends StatelessWidget {
           side: BorderSide(width: 0, color: Colors.transparent),
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Tapped $title"),
-          ));
-        },
+        onTap: onTap,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Center(
             child: Column(

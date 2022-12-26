@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:paribahan/widgets/backward_btn.dart';
 
 class PariBahanAppBar extends StatelessWidget with PreferredSizeWidget {
-  const PariBahanAppBar({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+  final bool isDark;
+  const PariBahanAppBar(
+      {Key? key, this.isDark = false, this.isLoggedIn = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +25,19 @@ class PariBahanAppBar extends StatelessWidget with PreferredSizeWidget {
       excludeHeaderSemantics: true,
       shadowColor: Colors.transparent,
       scrolledUnderElevation: 0,
-      surfaceTintColor: Colors.transparent,
-      foregroundColor: Colors.transparent,
       elevation: 0,
-      bottomOpacity: 0,
-      toolbarOpacity: 0,
+      leading: Navigator.of(context).canPop() == true
+          ? BackwardBtn(
+              onTap: () => Navigator.of(context).pop(),
+            )
+          : null,
+      leadingWidth: 110,
       title: const Image(image: AssetImage('assets/images/paribahan_logo.png')),
-      actions: const [Image(image: AssetImage('assets/images/avatar.png'))],
+      actions: [
+        isLoggedIn == true
+            ? Image(image: AssetImage('assets/images/loggedin_avatar.png'))
+            : Image(image: AssetImage('assets/images/avatar.png'))
+      ],
     );
   }
 

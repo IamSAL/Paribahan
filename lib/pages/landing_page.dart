@@ -31,22 +31,26 @@ class LandingPage extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
-                children: const [
+                children: [
                   FeatureCard(
-                    imagePath: 'assets/images/iconroute.png',
-                    title: "Routes & Rents",
-                  ),
+                      imagePath: 'assets/images/iconroute.png',
+                      title: "Routes & Rents",
+                      onTap: () =>
+                          Navigator.of(context).pushNamed("/routes_and_rents")),
                   FeatureCard(
                     imagePath: 'assets/images/iconnews.png',
                     title: "Traffic News",
+                    onTap: () => Navigator.of(context).pushNamed("/wip"),
                   ),
                   FeatureCard(
                     imagePath: 'assets/images/iconconnect.png',
                     title: "Connect",
+                    onTap: () => Navigator.of(context).pushNamed("/wip"),
                   ),
                   FeatureCard(
                     imagePath: 'assets/images/iconcontribute.png',
                     title: "Contribute",
+                    onTap: () => Navigator.of(context).pushNamed("/wip"),
                   ),
                 ],
               )
