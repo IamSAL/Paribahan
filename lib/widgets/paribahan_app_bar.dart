@@ -23,8 +23,10 @@ class PariBahanAppBar extends StatelessWidget with PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       excludeHeaderSemantics: true,
-      shadowColor: Colors.transparent,
+      shadowColor: Colors.white,
       scrolledUnderElevation: 0,
+      foregroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: Navigator.of(context).canPop() == true
           ? BackwardBtn(
