@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:paribahan/pages/coming_soon_page.dart';
 import 'package:paribahan/pages/landing_page.dart';
 import 'package:paribahan/pages/routes_and_rents/route_search_page.dart';
+import 'package:paribahan/widgets/customization/custom_thumb_shape.dart';
 
 void main() {
   initializeDateFormatting("en_US");
@@ -29,6 +30,11 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
+            sliderTheme: SliderThemeData(
+                rangeThumbShape: CustomThumbShape(),
+                inactiveTrackColor: Colors.white.withOpacity(0.75),
+                thumbColor: Color(0xFF08486A),
+                showValueIndicator: ShowValueIndicator.always),
             primarySwatch: Colors.blue,
             textTheme: GoogleFonts.poppinsTextTheme()),
         initialRoute: '/',
