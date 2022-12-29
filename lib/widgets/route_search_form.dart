@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paribahan/widgets/block_btn.dart';
 import 'package:paribahan/widgets/radio_button.dart';
 import 'package:paribahan/widgets/range_input.dart';
+import 'package:paribahan/widgets/tags_input.dart';
 
 import 'Icon_label_dropdown.dart';
 import 'icon_label_switch.dart';
@@ -32,51 +34,59 @@ class _RouteSearchFormState extends State<RouteSearchForm> {
     if (selectedSearchBy == SearchByTypes.location.name) {
       return ByLocationFields();
     } else if (selectedSearchBy == SearchByTypes.bus.name) {
+      return ByBusFields();
+    } else if (selectedSearchBy == SearchByTypes.route.name) {
       return Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  "assets/images/carbon_road.svg",
+                  color: Colors.white,
+                  semanticsLabel: 'A red up arrow',
+                  width: 25,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: LabeledSelect<String>(
+                  options: ["A320", "A3423", "DM343", "M734"],
+                  onChange: (value) => {},
+                  label: "Pick Route",
+                ))
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: LabeledSelect<String>(
-                    options: ["Local", "AC", "BRTC"],
-                    onChange: (value) => {},
-                    label: "Type"),
+              Text(
+                "Missing route?",
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.75), fontSize: 12),
               ),
               const SizedBox(
-                width: 20,
+                height: 5,
               ),
-              Expanded(
-                child: LabeledSelect<String>(
-                    options: ["All", "A643", "A436"],
-                    onChange: (value) => {},
-                    label: "Route No."),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: RangeInput(),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: LabeledSelect<String>(
-                    options: ["AC", "Non-AC"],
-                    onChange: (value) => {},
-                    label: "Condition"),
+              GestureDetector(
+                onTap: () => {},
+                child: const Text(
+                  " Add a route.",
+                  style: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.underline,
+                      fontSize: 12),
+                ),
               )
             ],
           )
         ],
-      );
-    } else if (selectedSearchBy == SearchByTypes.route.name) {
-      return Column(
-        children: [const Text("By route")],
       );
     } else {
       return Column(
@@ -134,11 +144,63 @@ class _RouteSearchFormState extends State<RouteSearchForm> {
         ),
         BlockBtn(
             label: "Search",
-            onTap: () {
-              print(SearchByTypes.values
-                  .map((enumValue) => enumValue.name)
-                  .toList());
-            })
+            onTap: () => Navigator.of(context).pushNamed("/wip"))
+      ],
+    );
+  }
+}
+
+class ByBusFields extends StatelessWidget {
+  const ByBusFields({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: LabeledSelect<String>(
+                  options: ["Local", "AC", "BRTC"],
+                  onChange: (value) => {},
+                  label: "Type"),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: LabeledSelect<String>(
+                  options: ["All", "A643", "A436"],
+                  onChange: (value) => {},
+                  label: "Route No."),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: RangeInput(label: "Rent Range"),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: LabeledSelect<String>(
+                  options: ["AC", "Non-AC"],
+                  onChange: (value) => {},
+                  label: "Condition"),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        TagsInput()
       ],
     );
   }

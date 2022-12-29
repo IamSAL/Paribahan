@@ -1,45 +1,61 @@
 import 'package:flutter/material.dart';
 
-class CustomThumbShape implements RangeSliderThumbShape {
-  const CustomThumbShape({
-    this.radius = 15.0,
-    this.ringColor = Colors.red,
-  });
-
-  /// Outer radius of thumb
-
-  final double radius;
-
-  /// Color of ring
-
-  final Color ringColor;
+class CustomRangeThumbShape extends RangeSliderThumbShape {
+  static const double _thumbSize = 8;
 
   @override
-  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size.fromRadius(radius);
-  }
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) => Size(2, 2);
 
   @override
   void paint(PaintingContext context, Offset center,
       {required Animation<double> activationAnimation,
       required Animation<double> enableAnimation,
-      required bool isDiscrete,
-      required bool isEnabled,
-      required bool isOnTop,
-      required TextDirection textDirection,
+      bool? isDiscrete,
+      bool? isEnabled,
+      bool? isOnTop,
+      TextDirection? textDirection,
       required SliderThemeData sliderTheme,
-      required Thumb thumb}) {
+      Thumb? thumb,
+      bool? isPressed}) {
     final Canvas canvas = context.canvas;
 
-    // To create a ring create outer circle and create an inner cicrle then
-    // subtract inner circle from outer circle and you will get a ring shape
-    // fillType = PathFillType.evenOdd will be used for that
-
-    Path path = Path()
-      ..addOval(Rect.fromCircle(center: center, radius: radius))
-      ..addOval(Rect.fromCircle(center: center, radius: radius - 5))
-      ..fillType = PathFillType.evenOdd;
-
-    canvas.drawPath(path, Paint()..color = ringColor);
+    Path thumbPath = _rightTriangle(_thumbSize, center);
+    switch (textDirection) {
+      case TextDirection.rtl:
+        switch (thumb) {
+          case Thumb.start:
+            thumbPath = _rightTriangle(_thumbSize, center);
+            break;
+          case Thumb.end:
+            thumbPath = _leftTriangle(_thumbSize, center);
+            break;
+        }
+        break;
+      case TextDirection.ltr:
+        switch (thumb) {
+          case Thumb.start:
+            thumbPath = _leftTriangle(_thumbSize, center);
+            break;
+          case Thumb.end:
+            thumbPath = _rightTriangle(_thumbSize, center);
+            break;
+        }
+        break;
+    }
+    canvas.drawPath(thumbPath, Paint()..color = sliderTheme.thumbColor!);
   }
 }
+
+Path _rightTriangle(double size, Offset thumbCenter, {bool invert = true}) {
+  final Path thumbPath = Path();
+  final double halfSize = size / 1.2;
+  final double sign = invert ? -1.0 : 1.0;
+  thumbPath.moveTo(thumbCenter.dx + halfSize * sign, thumbCenter.dy);
+  thumbPath.lineTo(thumbCenter.dx - halfSize * sign, thumbCenter.dy - size);
+  thumbPath.lineTo(thumbCenter.dx - halfSize * sign, thumbCenter.dy + size);
+  thumbPath.close();
+  return thumbPath;
+}
+
+Path _leftTriangle(double size, Offset thumbCenter) =>
+    _rightTriangle(size, thumbCenter, invert: false);

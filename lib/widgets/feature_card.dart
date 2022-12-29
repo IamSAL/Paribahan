@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FeatureCard extends StatelessWidget {
   final String imagePath;
@@ -28,7 +29,11 @@ class FeatureCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(image: AssetImage(imagePath)),
+            SvgPicture.asset(
+              imagePath,
+              semanticsLabel: title,
+              width: 45,
+            ),
             const SizedBox(
               height: 10,
             ),

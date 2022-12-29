@@ -34,11 +34,20 @@ class PariBahanAppBar extends StatelessWidget with PreferredSizeWidget {
             )
           : null,
       leadingWidth: 110,
-      title: const Image(image: AssetImage('assets/images/paribahan_logo.png')),
+      title: const Image(
+        image: AssetImage('assets/images/paribahan_logo.png'),
+        width: 72,
+      ),
       actions: [
         isLoggedIn == true
-            ? Image(image: AssetImage('assets/images/loggedin_avatar.png'))
-            : Image(image: AssetImage('assets/images/avatar.png'))
+            ? Image(
+                image: AssetImage('assets/images/loggedin_avatar.png'),
+                width: 72,
+              )
+            : Image(
+                image: AssetImage('assets/images/avatar.png'),
+                width: 72,
+              )
       ],
     );
   }
