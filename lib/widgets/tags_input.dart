@@ -40,7 +40,6 @@ class _TagsInputState extends State<TagsInput> {
     'Music',
     'Cooperative',
     'GTA driver',
-    'Uradhura',
   ];
   @override
   Widget build(BuildContext context) {

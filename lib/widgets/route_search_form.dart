@@ -144,7 +144,7 @@ class _RouteSearchFormState extends State<RouteSearchForm> {
         ),
         BlockBtn(
             label: "Search",
-            onTap: () => Navigator.of(context).pushNamed("/wip"))
+            onTap: () => Navigator.of(context).pushNamed("/search_result"))
       ],
     );
   }
@@ -219,19 +219,21 @@ class ByLocationFields extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Can’t find your location?",
-              style: TextStyle(color: Color(0xFFC4C4C4), fontSize: 12),
+            Text(
+              "Missing location?",
+              style: TextStyle(
+                  color: Colors.white.withOpacity(0.75), fontSize: 12),
             ),
             const SizedBox(
-              height: 5,
+              width: 5,
             ),
             GestureDetector(
               onTap: () => {},
               child: const Text(
-                "Add a missing place.",
+                "Add a place.",
                 style: TextStyle(
                     color: Colors.white,
                     decoration: TextDecoration.underline,
@@ -294,7 +296,6 @@ class FromToLocationPicker extends StatelessWidget {
             ),
             Container(
               height: 1,
-              width: 205,
               color: Colors.white.withOpacity(0.75),
             ),
             ConstrainedBox(
@@ -304,9 +305,7 @@ class FromToLocationPicker extends StatelessWidget {
                 widthFactor: 0.55,
                 child: LabeledSelect<String>(
                     options: ["Khilgaons", "Bananis", "Mohammadpurs"],
-                    onChange: (value) {
-                      print("onchange called");
-                    },
+                    onChange: (value) {},
                     label: "To",
                     disableUnderline: true),
               ),
@@ -316,11 +315,19 @@ class FromToLocationPicker extends StatelessWidget {
         const SizedBox(
           width: 15,
         ),
-        const Icon(
-          Icons.swap_vert,
-          color: Colors.white,
-          size: 25,
-        )
+        Material(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+          child: InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(20),
+            child: const Icon(
+              Icons.swap_vert,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
+        ),
       ],
     );
   }

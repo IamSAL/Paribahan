@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:paribahan/pages/coming_soon_page.dart';
 import 'package:paribahan/pages/landing_page.dart';
+import 'package:paribahan/pages/routes_and_rents/bus_detail_page.dart';
 import 'package:paribahan/pages/routes_and_rents/route_search_page.dart';
+import 'package:paribahan/pages/routes_and_rents/search_result_page.dart';
 import 'package:paribahan/widgets/customization/custom_thumb_shape.dart';
 
 void main() {
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const LandingPage(),
           '/routes_and_rents': (context) => const RouteSearchPage(),
+          '/search_result': (context) => const SearchResultPage(),
+          '/busdetails': (context) => const BusDetailPage(),
           '/wip': (context) => const ComingSoonPage(),
         });
   }

@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
+typedef List<Widget> selectedItemBuilderFunc(
+    BuildContext context, List<dynamic> options);
+
 class LabeledSelect<T> extends StatefulWidget {
   final List<T> options;
   final ValueChanged<T?> onChange;
   final String label;
   final bool? disableUnderline;
-  const LabeledSelect(
-      {Key? key,
-      required this.options,
-      required this.onChange,
-      required this.label,
-      this.disableUnderline = false})
-      : super(key: key);
+  final selectedItemBuilderFunc? customSelectedItemBuilder;
+  const LabeledSelect({
+    Key? key,
+    required this.options,
+    required this.onChange,
+    required this.label,
+    this.disableUnderline = false,
+    this.customSelectedItemBuilder,
+  }) : super(key: key);
 
   @override
   State<LabeledSelect<T>> createState() => _LabeledSelectState<T>();
@@ -48,10 +53,14 @@ class _LabeledSelectState<T> extends State<LabeledSelect<T>> {
         });
       },
       isExpanded: true,
+      itemHeight: kMinInteractiveDimension + 5,
     );
   }
 
   List<Widget> selectedItemBuilder(context) {
+    if (widget.customSelectedItemBuilder != null) {
+      return widget.customSelectedItemBuilder!(context, widget.options);
+    }
     return widget.options.map((T value) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
