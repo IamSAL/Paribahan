@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:paribahan/widgets/bus_details_rent_tab.dart';
+import 'package:paribahan/widgets/bus_details_reviews_tab.dart';
+import 'package:paribahan/widgets/bus_details_route_tab.dart';
 
 const double borderRadius = 5.0;
 
@@ -27,17 +30,16 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: _menuBar(context),
           ),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: PageView(
               controller: _pageController,
               physics: const ClampingScrollPhysics(),
@@ -48,24 +50,9 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
                 });
               },
               children: <Widget>[
-                ConstrainedBox(
-                  constraints: const BoxConstraints.expand(),
-                  child: const Center(
-                    child: Text("Route"),
-                  ),
-                ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints.expand(),
-                  child: const Center(
-                    child: Text("Rent Chart"),
-                  ),
-                ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints.expand(),
-                  child: const Center(
-                    child: Text("Reviews"),
-                  ),
-                )
+                BusDetailsRouteTab(),
+                BusDetailsRentTab(),
+                BusDetailsReviewsTab()
               ],
             ),
           ),
@@ -105,7 +92,7 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
 
   Widget _menuBar(BuildContext context) {
     return Container(
-      width: 300.0,
+      margin: EdgeInsets.symmetric(horizontal: 15),
       height: 50.0,
       decoration: const BoxDecoration(
         color: Color(0XFFE0E0E0),

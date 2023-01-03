@@ -20,15 +20,17 @@ class _TagsInputState extends State<TagsInput> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     _controller = TextfieldTagsController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (!mounted) {
+      _controller.dispose();
+    }
   }
 
   final List<String> _pickLanguage = <String>[

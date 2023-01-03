@@ -25,14 +25,9 @@ class BusDetailPage extends StatelessWidget {
             statusBarIconBrightness: Brightness.light),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width,
-              ),
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 35),
               decoration: BoxDecoration(
