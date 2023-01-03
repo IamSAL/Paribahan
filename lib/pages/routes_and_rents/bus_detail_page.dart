@@ -4,13 +4,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
-import 'package:paribahan/entities/bus_card_entity.dart';
-import 'package:paribahan/widgets/bus_card.dart';
-import 'package:paribahan/widgets/feature_card.dart';
-import 'package:paribahan/widgets/labeledSelect.dart';
 import 'package:paribahan/widgets/paribahan_app_bar.dart';
-import 'package:paribahan/widgets/route_search_form.dart';
+
+import '../../widgets/bus_details_tabs.dart';
 
 class BusDetailPage extends StatelessWidget {
   const BusDetailPage({Key? key}) : super(key: key);
@@ -29,10 +25,14 @@ class BusDetailPage extends StatelessWidget {
             statusBarIconBrightness: Brightness.light),
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width,
+              ),
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 35),
               decoration: BoxDecoration(
@@ -173,10 +173,7 @@ class BusDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              child: Text("bus detail"),
-            )
+            BusDetailsTabs()
           ],
         ),
       ),
