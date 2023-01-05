@@ -60,3 +60,24 @@ List<BusCardEntity> getRandomBusList() {
 
   return list;
 }
+
+final exampleBus = BusCardEntity(
+    id: 1,
+    name: "Bolaka paribahan",
+    rating: 3.5,
+    rent: 25,
+    route: BusRoute(routeNo: "Route A360", stoppages: [
+      BusStoppage(name: "Jatrabari"),
+      BusStoppage(name: "Mogh Bazar"),
+      BusStoppage(name: "Nabisco"),
+      BusStoppage(name: "Sena nibash"),
+      BusStoppage(name: "Tongi")
+    ]),
+    tagList: [
+      BusTag(feedbackType: FeedbackType.negative, name: "DhuraUra"),
+      BusTag(feedbackType: FeedbackType.positive, name: "Affordable"),
+      BusTag(feedbackType: FeedbackType.negative, name: "Non-AC"),
+      BusTag(feedbackType: FeedbackType.negative, name: "Too much stoppage"),
+      BusTag(feedbackType: FeedbackType.negative, name: "Murir tin"),
+      BusTag(feedbackType: FeedbackType.negative, name: "Uradhura"),
+    ]);

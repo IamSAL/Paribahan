@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paribahan/entities/common_entity.dart';
 import 'package:paribahan/widgets/paribahan_app_bar.dart';
 
 import '../../widgets/bus_details_tabs.dart';
@@ -29,6 +30,7 @@ class BusDetailPage extends StatelessWidget {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
+              height: percentOf(35, MediaQuery.of(context).size.height),
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 35),
               decoration: BoxDecoration(
                   color: Colors.white,

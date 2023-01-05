@@ -3,3 +3,7 @@ enum BusDetailsTabItems {
   rentChart,
   reviews;
 }
+
+double percentOf(num percent, num of) {
+  return ((percent / 100) * of);
+}

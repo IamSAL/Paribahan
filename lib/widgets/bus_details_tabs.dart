@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paribahan/widgets/bus_details_rent_tab.dart';
 import 'package:paribahan/widgets/bus_details_reviews_tab.dart';
 import 'package:paribahan/widgets/bus_details_route_tab.dart';
+import 'package:paribahan/widgets/forward_btn.dart';
+import 'package:paribahan/widgets/tab_container.dart';
+
+import '../entities/bus_card_entity.dart';
+import '../entities/common_entity.dart';
 
 const double borderRadius = 5.0;
 
@@ -29,35 +35,42 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: _menuBar(context),
+    return Stack(
+      children: [
+        Container(
+          height: percentOf(65, MediaQuery.of(context).size.height),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: _menuBar(context),
+              ),
+              Expanded(
+                flex: 1,
+                child: PageView(
+                  controller: _pageController,
+                  physics: const ClampingScrollPhysics(),
+                  onPageChanged: (int i) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    setState(() {
+                      activePageIndex = i;
+                    });
+                  },
+                  children: <Widget>[
+                    TabContainer(
+                      child: BusDetailsRouteTab(),
+                    ),
+                    TabContainer(child: BusDetailsRentTab()),
+                    TabContainer(child: BusDetailsReviewsTab())
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 1,
-            child: PageView(
-              controller: _pageController,
-              physics: const ClampingScrollPhysics(),
-              onPageChanged: (int i) {
-                FocusScope.of(context).requestFocus(FocusNode());
-                setState(() {
-                  activePageIndex = i;
-                });
-              },
-              children: <Widget>[
-                BusDetailsRouteTab(),
-                BusDetailsRentTab(),
-                BusDetailsReviewsTab()
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+        Positioned(bottom: 0, child: BusReviewTabBottom())
+      ],
     );
   }
 
@@ -110,6 +123,138 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
           Expanded(
             child: _menuBarItem("Reviews", 2),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class BusReviewTabBottom extends StatelessWidget {
+  const BusReviewTabBottom({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: Colors.white,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+              constraints: BoxConstraints(
+                  maxWidth: percentOf(95, MediaQuery.of(context).size.width)),
+              child: Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: exampleBus.tagList
+                        .map((tag) => Container(
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0),
+                                ),
+                                color: Color(0xFFF9F9F9),
+                              ),
+                              margin: const EdgeInsets.only(right: 10.0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5.0, vertical: 4.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    child: Text(
+                                      '#${tag.name}',
+                                      style: const TextStyle(
+                                          color: Color(0xFF6C6C6F),
+                                          fontSize: 9),
+                                    ),
+                                    onTap: () {
+                                      //print("$tag selected");
+                                    },
+                                  ),
+                                  const SizedBox(width: 4.0),
+                                  InkWell(
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 14.0,
+                                      color: tag.feedbackType ==
+                                              FeedbackType.positive
+                                          ? Color(0XFF9CE2CB)
+                                          : Color(0XFFE29C9C),
+                                    ),
+                                    onTap: () {},
+                                  )
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/images/rating_certification.svg",
+                      width: 18,
+                      color: Color(0xFF6C6C6E),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "345 Reviews",
+                      style: TextStyle(color: Color(0xFF6C6C6E), fontSize: 12),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Expanded(
+                    child: ForwardBtn(
+                  onTap: () {},
+                ))
+              ],
+            ),
+          )
         ],
       ),
     );
