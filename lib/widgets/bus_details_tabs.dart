@@ -42,9 +42,8 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: _menuBar(context),
+              SizedBox(
+                height: 60,
               ),
               Expanded(
                 flex: 1,
@@ -58,9 +57,7 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
                     });
                   },
                   children: <Widget>[
-                    TabContainer(
-                      child: BusDetailsRouteTab(),
-                    ),
+                    BusDetailsRouteTab(),
                     TabContainer(
                         child: BusDetailsRentTab(
                       rentChart: getRandomRentChart(),
@@ -72,6 +69,15 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
             ],
           ),
         ),
+        Positioned(
+            top: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width),
+                  child: _menuBar(context)),
+            )),
         Positioned(bottom: 0, child: BusReviewTabBottom())
       ],
     );
