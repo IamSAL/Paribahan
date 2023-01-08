@@ -15,7 +15,7 @@ class _TabContainerState extends State<TabContainer> {
     if (_controller.offset == 0.0 ||
         _controller.position.extentBefore == 0.0 ||
         _controller.position.extentAfter == 0.0) {
-      scrollPhysics = const NeverScrollableScrollPhysics();
+      // scrollPhysics = const NeverScrollableScrollPhysics();
 
       Future.delayed(const Duration(seconds: 1), () {
         scrollPhysics = const ClampingScrollPhysics();

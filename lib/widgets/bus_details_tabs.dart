@@ -61,7 +61,10 @@ class _BusDetailsTabsState extends State<BusDetailsTabs>
                     TabContainer(
                       child: BusDetailsRouteTab(),
                     ),
-                    TabContainer(child: BusDetailsRentTab()),
+                    TabContainer(
+                        child: BusDetailsRentTab(
+                      rentChart: getRandomRentChart(),
+                    )),
                     TabContainer(child: BusDetailsReviewsTab())
                   ],
                 ),

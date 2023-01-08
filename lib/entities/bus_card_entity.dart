@@ -1,3 +1,5 @@
+import 'package:paribahan/entities/common_entity.dart';
+
 enum FeedbackType { positive, neutral, negative }
 
 class BusStoppage {
@@ -81,3 +83,22 @@ final exampleBus = BusCardEntity(
       BusTag(feedbackType: FeedbackType.negative, name: "Murir tin"),
       BusTag(feedbackType: FeedbackType.negative, name: "Uradhura"),
     ]);
+
+List<RenTableRowEntity> getRandomRentChart() {
+  final List<RenTableRowEntity> list = [];
+  for (var i = 0; i <= 15; i++) {
+    list.add(RenTableRowEntity(
+        fromStation: BusStoppage(name: "Tongi"),
+        toStationList: [
+          BusRentInnerRowEntity(BusStoppage(name: "Uttara"), 3.3, 10.00),
+          BusRentInnerRowEntity(BusStoppage(name: "Airport"), 5.3, 20.00),
+          BusRentInnerRowEntity(BusStoppage(name: "Mohakhali"), 6.2, 30.00),
+          BusRentInnerRowEntity(BusStoppage(name: "Khilgaon"), 7, 53.00),
+          BusRentInnerRowEntity(BusStoppage(name: "Malibagh"), 9, 60.00),
+          BusRentInnerRowEntity(BusStoppage(name: "Jatrabari"), 13.3, 75.00),
+          BusRentInnerRowEntity(BusStoppage(name: "N.ganj"), 15.3, 110.00)
+        ]));
+  }
+
+  return list;
+}
